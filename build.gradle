@@ -35,6 +35,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-mail")
 	runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") 
-	
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+	providedCompile group: 'org.projectlombok', name: 'lombok', version: '0.11.0'
+
 }
