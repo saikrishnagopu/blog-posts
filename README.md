@@ -1,27 +1,22 @@
-# payment-service
+Admin users can post, update and delete blogs. (Authenticated endpoints)
+Posting a blog - POST /v1/blogs
+Required fields - name, content
+Unauthenticated requests should throw a 401.
+Requests with missing required fields should return 400.
+Requests with non-string values for name and content should return 400.
+Success response should be valid JSON and have an integer id field for the created blog.
 
-1. Each user with different Email Id will have one account
-2. Each Account Will have multiple transaction, whether its credit or debit.
-3. Cron Job Running for both daily reminders and hourly remainders.
+Updating a blog - PUT /v1/blogs/{{blogId}}
+Unauthenticated requests should throw a 401.
+Invalid requests should throw a 400.
+Deleting a blog - DELET /v1/blogs/{{blogId}}
+Unauthenticated requests should throw a 401.
+Deleting an already deleted record should return a 200.
+Non-admin users can fetch a listing of all blogs(names and posted date) and get an individual blog item to see it in detail (name, posted date and content)
+Get blog listing - GET /v1/blogs
 
-To save the transaction:
-POST: vaccount/new
-Content-Type, value:application/json"
+Get listing should accept a limit param to limit the number of returned records.
+GET /v1/blogs?limit=3
+Get single blog item - GET /v1/blogs/{{blogId}}
 
-{
-	"from_service_name": "payment_service",
-	"data":{
-		"type": "transaction",
-		"data":{
-			"created_at": "121212121",
-			"user_email": "saikrishnagopu@gmail.com",
-			"inc_id": 12312121,
-			"transaction_id": "trans130",
-			"amount": 10000,
-			"action": "debit"
-		}
-	}
-}
-
-
-And each transaction, transaction Id is unique.
+Trying to get a deleted/non existent blog should return 404.
